@@ -1,6 +1,4 @@
 ---
-version: "3"
-
 services:
   concourse-db:
     image: postgres
@@ -12,6 +10,7 @@ services:
 
   concourse:
     image: concourse/concourse
+    platform: linux/amd64
     command: quickstart
     privileged: true
     depends_on: [concourse-db]
@@ -21,6 +20,6 @@ services:
       - CONCOURSE_POSTGRES_USER=concourse_user
       - CONCOURSE_POSTGRES_PASSWORD=concourse_pass
       - CONCOURSE_POSTGRES_DATABASE=concourse
-      - CONCOURSE_EXTERNAL_URL
+      - CONCOURSE_EXTERNAL_URL=http://localhost:8080
       - CONCOURSE_ADD_LOCAL_USER=admin:admin
       - CONCOURSE_MAIN_TEAM_LOCAL_USER=admin
